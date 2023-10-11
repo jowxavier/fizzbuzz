@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+    web:
+        image: nginx:latest
+        container_name: fizzbuzz-web
+        ports:
+            - '80:80'
+        volumes:
+            - ./:/var/www/html
+            - ./config/default.conf:/etc/nginx/conf.d/default.conf
+
+    fizzbuzz:
+        build:
+            context: ./config
+        container_name: fizzbuzz-app
+        volumes:
+            - ./:/var/www/html
+        ports:
+            - "9000:9000"
