@@ -5,13 +5,14 @@ WORKDIR /var/www/html
 
 # Instalar dependências
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    locales \
-    jpegoptim optipng pngquant gifsicle \
+    zlib1g-dev \
+    libzip-dev \
+    unzip \
     git \
     curl
+
+# Instalar extensões
+RUN docker-php-ext-install zip
 
 # Instalar composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
